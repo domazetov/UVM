@@ -3,7 +3,7 @@
 
 class eq_simple_test extends eq_base_test;
 
-   `uvm_component_utils(test_svm_dskw_simple_2)
+   `uvm_component_utils(eq_simple_test)
 
    eq_axil_seq axil_seq;
    eq_axis_seq axis_seq;
