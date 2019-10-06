@@ -22,7 +22,7 @@ package eq_verif_pkg;
  `include "eq_env.sv"
 
  `include "sequences/eq_seq_lib.sv"
- `include "tests/test_lib.sv"
+ `include "tests/eq_test_lib.sv"
 
 endpackage : eq_verif_pkg
 
