@@ -24,42 +24,42 @@ class eq_axil_seq extends eq_axil_base_seq;
 			case(n)
 				0: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b000100011111111010110011; 		//p1
+						req.axil_wdata 	<= 32'b000000000000100011111111010110011; 		//p1
 				end
 				1: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b000100011111111010110011; 		//p2
+						req.axil_wdata 	<= 32'b000000000000100011111111010110011; 		//p2
 				end
 				2: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b000100011111111010110011;			//p3
+						req.axil_wdata 	<= 32'b000000000000100011111111010110011;			//p3
 				end
 				3: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b000101111111111100100010;			//p4
+						req.axil_wdata 	<= 32'b000000000000101111111111100100010;			//p4
 				end
 				4: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b001000000000000000000000;			//p5
+						req.axil_wdata 	<= 32'b000000000001000000000000000000000;			//p5
 				5: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b001010101010110000110101;			//p6
+						req.axil_wdata 	<= 32'b000000000001010101010110000110101;			//p6
 				end
 				6: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b001110001110011110101010;			//p7
+						req.axil_wdata 	<= 32'b000000000001110001110011110101010;			//p7
 				end
 				7: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b001110001110011110101010;			//p8
+						req.axil_wdata 	<= 32'b000000000001110001110011110101010;			//p8
 				end	
 				8: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b001110001110011110101010;			//p9
+						req.axil_wdata 	<= 32'b000000000001110001110011110101010;			//p9
 				end
 				9: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 24'b001110001110011110101010;			//p10
+						req.axil_wdata 	<= 32'b000000000001110001110011110101010;			//p10
 				end
 				10: begin
 						req.axil_awaddr	<= n;
