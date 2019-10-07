@@ -8,9 +8,6 @@ N
 /verif/sim/Equalizer.mpf
 /verif/sim/vsim.wlf
 /verif/sv/backup
-verif/sv/eq_scoreboard.sv
 IP_output.sv
 IP_output.txt
-IP_output_im.txt
-IP_output_re.txt
 pojacanja.sv
