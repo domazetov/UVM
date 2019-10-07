@@ -8,6 +8,4 @@ N
 /verif/sim/Equalizer.mpf
 /verif/sim/vsim.wlf
 /verif/sv/backup
-/verif/sv/sequences
-/verif/sv/tests
-/verif/sv/eq_scoreboard.sv
+verif/sv/eq_scoreboard.sv

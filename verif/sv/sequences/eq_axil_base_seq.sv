@@ -1,5 +1,5 @@
-`ifndef eq_AXIL_BASE_SEQ_SV
-`define eq_AXIL_BASE_SEQ_SV
+`ifndef EQ_AXIL_BASE_SEQ_SV
+`define EQ_AXIL_BASE_SEQ_SV
 
 class eq_axil_base_seq extends uvm_sequence#(axil_frame);
 

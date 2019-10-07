@@ -4,7 +4,7 @@
 class axis_frame extends uvm_sequence_item;
 
 	bit [31:0]			axis_master_data;
-	bit [31:0]			axis_slave_data;
+	bit [48:0]			axis_slave_data;
 
     // constraints
 

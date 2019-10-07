@@ -48,8 +48,8 @@ architecture Behavioral of IP is
     signal adder_reg, adder_next: unsigned(BOUNDARIES_WIDTH-1 downto 0);
     signal adder_out: unsigned(BOUNDARIES_WIDTH-1 downto 0);
     signal subtraction_out: unsigned(BOUNDARIES_WIDTH-1 downto 0);
-    signal y_re_reg, y_re_next: signed(2*DATA_WIDTH-1 downto 0);
-    signal y_im_reg, y_im_next: signed (2*DATA_WIDTH-1 downto 0);
+    signal y_re_reg, y_re_next: signed((AMPLIFICATION_WIDTH+DATA_WIDTH)-1 downto 0);
+    signal y_im_reg, y_im_next: signed ((AMPLIFICATION_WIDTH+DATA_WIDTH)-1 downto 0);
     signal mux1: signed(AMPLIFICATION_WIDTH-1 downto 0);
     signal mux2: unsigned(BOUNDARIES_WIDTH-1 downto 0);
     signal mux3: unsigned(BOUNDARIES_WIDTH-1 downto 0); 
@@ -263,7 +263,7 @@ begin
    status_end <= '1' when subtraction_out = 1 else '0';
    
    -- datapath: output
-    y_re <= std_logic_vector(y_re_reg((DATA_WIDTH+AMPLIFICATION_WIDTH)-2 downto AMPLIFICATION_WIDTH-1));
-    y_im <= std_logic_vector(y_im_reg((DATA_WIDTH+AMPLIFICATION_WIDTH)-2 downto AMPLIFICATION_WIDTH-1)); 
+    y_re <= std_logic_vector(y_re_reg((DATA_WIDTH+AMPLIFICATION_WIDTH)-3 downto AMPLIFICATION_WIDTH-2));
+    y_im <= std_logic_vector(y_im_reg((DATA_WIDTH+AMPLIFICATION_WIDTH)-3 downto AMPLIFICATION_WIDTH-2)); 
        
 end Behavioral;
