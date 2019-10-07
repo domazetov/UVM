@@ -15,7 +15,7 @@ class eq_axis_master_seq extends axis_base_seq;
     // UVM factory registration
     `uvm_object_utils(eq_axis_master_seq)
 
-	`include "master/sequences/input.sv"
+	`include "sequences/input.sv"
 
     // new - constructor
 	function new(string name = "eq_axis_master_seq");
@@ -67,13 +67,13 @@ task eq_axis_master_seq::load_input(input integer n);
 		req = axis_transaction::type_id::create("req");
 		start_item(req);
 
-		a = input[input_ptr];
-		b = input[input_ptr+1];
+		a = x_re[input_ptr];
+		b = x_im[input_ptr];
 		c = {b,a};
 		req.axis_master_data = c;
 		`uvm_info(get_type_name(), $sformatf("Sent input %d c = {b,a} -> %X \n",input_cnt,c), UVM_HIGH)
-		input_cnt += 2;
-		input_ptr += 2;
+		input_cnt += 1;
+		input_ptr += 1;
 		finish_item(req);
 	end
 endtask
