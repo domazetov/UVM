@@ -1,14 +1,3 @@
-################################################################################
-#    +-+-+-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+-+-+-+ +-+-+ +-+-+-+-+-+-+-+-+
-#    |F|u|n|c|t|i|o|n|a|l| |V|e|r|i|f|i|c|a|t|i|o|n| |o|f| |H|a|r|d|w|a|r|e|
-#    +-+-+-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+-+-+-+-+-+ +-+-+ +-+-+-+-+-+-+-+-+
-#
-#    FILE            run
-#
-#    DESCRIPTION
-#
-################################################################################
-
 # Create the library.
 if [ file exists work] {
     vdel -all
@@ -36,8 +25,11 @@ vlog -sv \
 # run simulation
 vopt eq_verif_top -o opttop +cover
 vsim eq_verif_top -novopt +UVM_TESTNAME=test_eq_my_1 +UVM_VERBOSITY=UVM_LOW -sv_seed random
+
 vsim -coverage opttop
-coverage save eval_verif_top.ucdb
+coverage save eq_verif_top.ucdb
+
+#vsim -coverage opttop  -novopt +UVM_TIMEOUT=200 +UVM_TESTNAME=test_svm_dskw_simple_2 #+UVM_VERBOSITY=UVM_NONE -sv_seed random 
 
 # do wave.do 
 run -all
