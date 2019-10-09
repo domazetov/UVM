@@ -7,7 +7,6 @@ N
 /verif/sim/Equalizer.cr.mti
 /verif/sim/Equalizer.mpf
 /verif/sim/vsim.wlf
-/verif/sv/backup
 IP_output.sv
 IP_output.txt
 pojacanja.sv

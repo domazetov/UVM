@@ -1,7 +1,7 @@
 `ifndef EQ_AXIS_MASTER_SEQ_SV
 `define EQ_AXIS_MASTER_SEQ_SV
 
-class eq_axis_master_seq extends axis_base_seq;
+class eq_axis_master_seq extends eq_axis_base_seq;
 
 	bit[23:0] a,b; 
 	bit[47:0] c;
@@ -10,7 +10,7 @@ class eq_axis_master_seq extends axis_base_seq;
 	int total;
 	int input_cnt;//
 	int first;
-	int biases_ptr;//
+	int input_ptr;//
 
     // UVM factory registration
     `uvm_object_utils(eq_axis_master_seq)
@@ -64,7 +64,7 @@ task eq_axis_master_seq::load_input(input integer n);
 
 	input_cnt=0;
 	while(input_cnt!=n) begin//input
-		req = axis_transaction::type_id::create("req");
+		req = axis_frame::type_id::create("req");
 		start_item(req);
 
 		a = x_re[input_ptr];

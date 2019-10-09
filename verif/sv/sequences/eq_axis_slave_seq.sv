@@ -8,7 +8,7 @@ class eq_axis_slave_seq extends eq_axis_base_seq;
 	bit[23:0]  x_im[24];
 	int 		cnt_output_reg;		
 	int 		num_curr_layer;
-
+	int i = 0;
 
 	function new(string name = "eq_axis_slave_seq");
 		super.new(name);
@@ -27,14 +27,14 @@ class eq_axis_slave_seq extends eq_axis_base_seq;
 	task reset_data();
 		cnt_output_reg = 0;
 		num_curr_layer = 0;
-		for(int i=0;i<24;i++)
+		for(i=0;i<24;i++)
 			x_re[i] = 0;
 			x_im[i] = 0;
 	endtask
 
     virtual task body(); 
 
-		for(int i=0;i<24;i++)
+		for(i=0;i<24;i++)
 			x_re[i] = 0;
 			x_im[i] = 0;
 
@@ -54,7 +54,7 @@ class eq_axis_slave_seq extends eq_axis_base_seq;
 			end
 			else if(cnt_output_reg>=24)
 			begin
-				x_im[cnt_output_reg] = req.axis_slave_data];
+				x_im[cnt_output_reg] = req.axis_slave_data;
 			end
 			`uvm_info(get_type_name(), $sformatf("\nreq.axis_slave_data = %X\nAxi stream data which is read next_layer_inputs[%d] = %X\n",req.axis_slave_data,cnt_output_reg,x_re[cnt_output_reg],x_im[cnt_output_reg]), UVM_HIGH)
 

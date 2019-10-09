@@ -42,7 +42,7 @@ class eq_scoreboard extends uvm_scoreboard;
 
 	function write (input axis_frame fr);
 		axis_frame fr_clone;
-		assert($cast(tr_clone, fr.clone()));
+		assert($cast(fr_clone, fr.clone()));
 
 		if(checks_enable) begin
 			status_re = $fscanf(y_re_expected,"%f",expected_result_re); //izmena
@@ -52,7 +52,7 @@ class eq_scoreboard extends uvm_scoreboard;
 			if(status_im != 1) $error("*E:	Error while opening file IP_output_im \n"); //izmena
 
 
-			temp_result	= tr_clone.axis_slave_data;
+			temp_result	= fr_clone.axis_slave_data;
 			temp1 = temp_result & 48'b000000000000000000000000111111111111111111111111; //izmena
 			temp2 = temp_result >> 24; //izmena
 			dut_result_re	= bin2real(temp1); //izmena

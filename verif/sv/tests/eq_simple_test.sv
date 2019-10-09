@@ -6,8 +6,8 @@ class eq_simple_test extends eq_base_test;
    `uvm_component_utils(eq_simple_test)
 
    eq_axil_seq axil_seq;
-   eq_axis_seq axis_seq;
-   
+   eq_axis_slave_seq axis_slave_seq;
+   eq_axis_master_seq axis_master_seq;
 
    function new(string name = "eq_simple_test", uvm_component parent = null);
       super.new(name,parent);
@@ -15,8 +15,9 @@ class eq_simple_test extends eq_base_test;
    
    function void build_phase(uvm_phase phase);
       super.build_phase(phase);
-      axil_seq = svm_axil_seq::type_id::create("axil_seq");
-      axis_seq = svm_dskw_axis_seq::type_id::create("axis_seq");
+      axil_seq = eq_axil_seq::type_id::create("axil_seq");
+      axis_slave_seq = eq_axis_slave_seq::type_id::create("axis_slave_seq");
+      axis_master_seq = eq_axis_master_seq::type_id::create("axis_master_seq");
    endfunction : build_phase
 
    task run_phase(uvm_phase phase);
@@ -24,7 +25,8 @@ class eq_simple_test extends eq_base_test;
       phase.phase_done.set_drain_time(this, 1000);
       fork
 	      axil_seq.start(env.axil_agent.axil_seqr);	         	            
-	      axis_seq.start(env.axis_agent.axis_seqr);         
+	      axis_slave_seq.start(env.axis_agent.axis_slave_seq);     
+         axis_master_seq.start(env.axis_agent.axis_master_seq);    
 	   join_any    
       phase.drop_objection(this);
    endtask : run_phase

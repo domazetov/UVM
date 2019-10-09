@@ -11,55 +11,54 @@ class eq_axil_seq extends eq_axil_base_seq;
     endfunction
 
     virtual task body();
-		
+		int n = 0;
 		`uvm_info(get_type_name(), $sformatf("AXI LITE SLAVE Sequence started \n"), UVM_HIGH)
 
 		repeat(19) begin
-			req = axil_transaction::type_id::create("req");
+			req = axil_frame::type_id::create("req");
 
 			start_item(req);
-
-			req.dir = AXIL_WRITE;
 
 			case(n)
 				0: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000000100011111111010110011; 		//p1
+						req.axil_wdata 	<= 32'b100011111111010110011; 		//p1
 				end
 				1: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000000100011111111010110011; 		//p2
+						req.axil_wdata 	<= 32'b100011111111010110011; 		//p2
 				end
 				2: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000000100011111111010110011;			//p3
+						req.axil_wdata 	<= 32'b100011111111010110011;			//p3
 				end
 				3: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000000101111111111100100010;			//p4
+						req.axil_wdata 	<= 32'b101111111111100100010;			//p4
 				end
 				4: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000001000000000000000000000;			//p5
+						req.axil_wdata 	<= 32'b1000000000000000000000;			//p5
+				end
 				5: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000001010101010110000110101;			//p6
+						req.axil_wdata 	<= 32'b1010101010110000110101;			//p6
 				end
 				6: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000001110001110011110101010;			//p7
+						req.axil_wdata 	<= 32'b1110001110011110101010;			//p7
 				end
 				7: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000001110001110011110101010;			//p8
+						req.axil_wdata 	<= 32'b1110001110011110101010;			//p8
 				end	
 				8: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000001110001110011110101010;			//p9
+						req.axil_wdata 	<= 32'b1110001110011110101010;			//p9
 				end
 				9: begin
 						req.axil_awaddr	<= n;
-						req.axil_wdata 	<= 32'b000000000001110001110011110101010;			//p10
+						req.axil_wdata 	<= 32'b1110001110011110101010;			//p10
 				end
 				10: begin
 						req.axil_awaddr	<= n;
@@ -92,6 +91,7 @@ class eq_axil_seq extends eq_axil_base_seq;
 				17: begin
 						req.axil_awaddr	<= n;
 						req.axil_wdata 	<= 32'd232;			//pr8
+				end
 				18: begin
 						req.axil_awaddr	<= n;
 						req.axil_wdata 	<= 32'd348;			//pr9
@@ -99,6 +99,7 @@ class eq_axil_seq extends eq_axil_base_seq;
 			endcase
 
 			finish_item(req);
+			n++;
 		end
     endtask : body 
 
