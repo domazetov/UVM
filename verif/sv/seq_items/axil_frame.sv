@@ -1,6 +1,9 @@
 `ifndef AXIL_FRAME_SV
  `define AXIL_FRAME_SV
 
+parameter integer C_S00_AXIL_DATA_WIDTH = 32;
+parameter integer C_S00_AXIL_ADDR_WIDTH = 7;
+
 class axil_frame extends uvm_sequence_item;
 
 	logic [C_S00_AXIL_ADDR_WIDTH - 1 : 0]  address;

@@ -8,7 +8,7 @@ class axis_frame extends uvm_sequence_item;
 
     // constraints
 
-	`uvm_object_utils_begin(axis_transaction)
+	`uvm_object_utils_begin(axis_frame)
 		`uvm_field_int(axis_master_data , UVM_DEFAULT)
 		`uvm_field_int(axis_slave_data , UVM_DEFAULT)
 	`uvm_object_utils_end

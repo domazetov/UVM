@@ -9,25 +9,23 @@ class eq_scoreboard extends uvm_scoreboard;
 	bit 		 coverage_enable	= 1;
 	int 		 num_of_tr;
 	int 		 num_of_tr_moduo_42;
-	//int 		 fd_output_neurons;
-	int 		 status_re; //izmena
-	int 		 status_im; //izmena
-	logic [47:0] temp_result; //izmena
-	logic [23:0] temp1; //izmena
-	logic [23:0] temp2; //izmena
-	real 		 dut_result_re; //izmena
-	real 		 dut_result_im; //izmena
-	real 		 expected_result_re; //izmena
-	real 		 expected_result_im; //izmena
+	int 		 status_re; 
+	int 		 status_im; 
+	logic [47:0] temp_result; 
+	logic [23:0] temp1; 
+	logic [23:0] temp2; 
+	real 		 dut_result_re;
+	real 		 dut_result_im;
+	real 		 expected_result_re; 
+	real 		 expected_result_im; 
+	real 		 p = 0.5;
 
 	//*****ERROR TOLERANCE
-	logic[23:0]  error_tolerance;
-	real 		 error_tolerance_f;
-	error_tolerance   = 24'b000000000010000011000101; //0.001 //izmena
-	error_tolerance_f = bin2real(error_tolerance);
+	logic[23:0]  error_tolerance = 24'b000000000010000011000101;
+	real 		 error_tolerance_f = bin2real(error_tolerance);
 
-	y_re_expected = $fopen("../IP_output_re.txt","r"); //izmena
-	y_im_expected = $fopen("../IP_output_im.txt","r"); //izmena
+	int 		 y_re_expected = $fopen("../sv/IP_output_re.txt", "r");
+	int          y_im_expected = $fopen("../sv/IP_output_im.txt", "r");
 
 	// This TLM port is used to connect the scoreboard to the monitor
 	uvm_analysis_imp#(axis_frame, eq_scoreboard) item_collected_imp;
@@ -62,7 +60,7 @@ class eq_scoreboard extends uvm_scoreboard;
 
 			num_of_tr_moduo_42 = 1; // OVDE CEMO MENJATI KADA UBACIMO DA IMA VISE PAKETA JER SADA RADI SA 1024 VREDNOSTI ODNOSNO 1 PAKETOM
 
-			asrt_check_result: assert((dut_result_re >= (expected_result_re-error_tolerance_f))&&(dut_result_re <= (expected_result_re+error_tolerance_f))) //izmena
+			asrt_check_result_re: assert((dut_result_re >= (expected_result_re-error_tolerance_f))&&(dut_result_re <= (expected_result_re+error_tolerance_f))) //izmena
 				$display("**************TEST PASS - PACKAGE_NUMBER: %0d - FRAME: %0d - Expected: %0d -  Result: %0d **************\n \n ", num_of_tr_moduo_42, num_of_tr, expected_result_re, dut_result_re); //izmena
 			else
 			begin
@@ -70,7 +68,7 @@ class eq_scoreboard extends uvm_scoreboard;
 				//$finish;
 			end
 			
-			asrt_check_result: assert((dut_result_im >= (expected_result_im-error_tolerance_f))&&(dut_result_im <= (expected_result_im+error_tolerance_f))) //izmena 
+			asrt_check_result_im: assert((dut_result_im >= (expected_result_im-error_tolerance_f))&&(dut_result_im <= (expected_result_im+error_tolerance_f))) //izmena 
 				$display("**************TEST PASS - PACKAGE_NUMBER: %0d - FRAME: %0d - Expected: %0d -  Result: %0d **************\n \n ", num_of_tr_moduo_42, num_of_tr, expected_result_im, dut_result_im);//izmena
 			else
 			begin
@@ -91,23 +89,23 @@ class eq_scoreboard extends uvm_scoreboard;
 			sign = 1'b1;
 
 		bin2real = 0; // mislim i da ovo ne pise da bi bio 0
-		real p = 0.5
 		if(!sign)
-			for(int i =22; i >-1; i++)
+		begin
+			for(int i =22; i >=0; i++)
 				bin2real += x[i]*p;
 				p = p/2;
-			end;
+		end
 		else
+		begin
 			x = x - 'b000000000000000000000001;
 			for(int i =22; i >-1; i++)
 				bin2real -= ~x[i]*p;
 				p = p/2;
-			end;	
+		end	
 		endfunction
 
 	function void report_phase(uvm_phase phase);
-		`uvm_info(get_type_name(), $sformatf("Calc scoreboard examined: %0d
-		transactions", num_of_tr), UVM_LOW);
+		`uvm_info(get_type_name(), $sformatf("Calc scoreboard examined: %0d	transactions", num_of_tr), UVM_LOW);
 	endfunction : report_phase
 
 endclass : eq_scoreboard

@@ -64,7 +64,7 @@ endtask : run_phase
 // monitor axis interface and collect transactions
 task eq_axis_monitor::collect_transactions_sl();
     forever begin
-        frame_sl = axis_transaction::type_id::create("frame_sl");
+        frame_sl = axis_frame::type_id::create("frame_sl");
 
         // collect transactions only for this slave
         @(posedge vif.clk);
@@ -80,9 +80,9 @@ task eq_axis_monitor::collect_transactions_sl();
 endtask : collect_transactions_sl
 
 
-task axis_master_monitor::collect_transactions_ma();
+task eq_axis_monitor::collect_transactions_ma();
     forever begin
-        frame_ma = axis_transaction::type_id::create("frame_ma");
+        frame_ma = axis_frame::type_id::create("frame_ma");
 
         // collect transactions only for this master
         @(posedge vif.clk);

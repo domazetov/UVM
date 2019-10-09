@@ -2,12 +2,12 @@
 `define EQ_VERIF_TOP_SV
 
 module eq_verif_top#
-  ( parameter integer DATA_WIDTH = 24;
-    parameter integer AMPLIFICATION_WIDTH = 24;
-    parameter integer BOUNDARIES_WIDTH = 11;
-    parameter integer PACKAGE_LENGTH = 1024;
-    parameter integer C_S00_AXIL_DATA_WIDTH = 32;
-    parameter integer C_S00_AXIL_ADDR_WIDTH = 7;
+  ( parameter integer DATA_WIDTH = 24,
+    parameter integer AMPLIFICATION_WIDTH = 24,
+    parameter integer BOUNDARIES_WIDTH = 11,
+    parameter integer PACKAGE_LENGTH = 1024,
+    parameter integer C_S00_AXIL_DATA_WIDTH = 32,
+    parameter integer C_S00_AXIL_ADDR_WIDTH = 7
    )
    ();
    

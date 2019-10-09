@@ -1,11 +1,13 @@
 `ifndef EQ_VERIF_PKG_SV
  `define EQ_VERIF_PKG_SV
 
+
 package eq_verif_pkg;
 
  import uvm_pkg::*;            
  `include "uvm_macros.svh"     
    
+
  `include "eq_config.sv"
  `include "seq_items/axil_frame.sv"
  `include "seq_items/axis_frame.sv"

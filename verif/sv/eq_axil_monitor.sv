@@ -47,9 +47,7 @@ class eq_axil_monitor extends uvm_monitor;
       
    endfunction : connect_phase
 
-   task run_phase(uvm_phase phase);
-      
-      
+   task run_phase(uvm_phase phase);     
       forever begin
 
          current_frame = axil_frame::type_id::create("current_frame", this);
@@ -59,7 +57,8 @@ class eq_axil_monitor extends uvm_monitor;
                address = vif.s00_axi_awaddr;               
                write_address.sample();
             end
-         end
+      end
+      end
    endtask : run_phase
 
 endclass : eq_axil_monitor

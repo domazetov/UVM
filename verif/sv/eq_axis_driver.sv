@@ -57,9 +57,9 @@ task eq_axis_driver::get_and_drive_sl();
 
       seq_item_port.item_done();
    end
-endtask : get_and_drive
+endtask : get_and_drive_sl
 
-task axis_slave_driver::get_and_drive_ma();
+task eq_axis_driver::get_and_drive_ma();
    forever begin
       seq_item_port.get_next_item(req);
 
@@ -68,7 +68,7 @@ task axis_slave_driver::get_and_drive_ma();
       seq_item_port.item_done();
 		seq_item_port.put_response(req);
    end
-endtask : get_and_drive
+endtask : get_and_drive_ma
 
 task eq_axis_driver::drive_slave (axis_frame sl);
 
@@ -93,7 +93,7 @@ task eq_axis_driver::drive_slave (axis_frame sl);
 
 	@(posedge vif.clk);
 	vif.s01_axis_tvalid <= 0;
-endtask : drive_tr
+endtask : drive_slave
 
 task eq_axis_driver::drive_master (axis_frame ma);
 
@@ -109,7 +109,7 @@ task eq_axis_driver::drive_master (axis_frame ma);
 	@(posedge vif.clk);
 	@(posedge vif.clk);
 	vif.m00_axis_tready = 0;
-endtask : drive_tr
+endtask : drive_master
 
 task eq_axis_driver::force_reset();
 	@(posedge vif.clk)
@@ -119,7 +119,7 @@ task eq_axis_driver::force_reset();
 	@(posedge vif.clk)
 	@(posedge vif.clk)
 		vif.rst <= 1;
-endtask : reset
+endtask : force_reset
 
 `endif
 
