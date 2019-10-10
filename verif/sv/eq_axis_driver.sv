@@ -87,7 +87,7 @@ task eq_axis_driver::drive_slave (axis_frame sl);
 	vif.s01_axis_tvalid <= 1'b1;
 
 	wait(vif.s01_axis_tvalid);
-	vif.s01_axis_tdata  <=  tr.axis_master_data;
+	vif.s01_axis_tdata  <=  sl.axis_master_data;
 
 	wait(vif.s01_axis_tready == 1'b1);
 
@@ -102,7 +102,7 @@ task eq_axis_driver::drive_master (axis_frame ma);
 
 	@(posedge vif.clk);
 	wait(vif.m00_axis_tvalid)
-	tr.axis_slave_data = vif.m00_axis_tdata;
+	ma.axis_slave_data = vif.m00_axis_tdata;
 
 	`uvm_info(get_type_name(), $sformatf("\n***Axi stream slave driver read data -> %d\n",vif.m00_axis_tdata), UVM_HIGH)
 

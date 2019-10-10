@@ -6,7 +6,7 @@ class eq_env extends uvm_env;
    eq_axis_agent axis_agent;
    eq_axil_agent axil_agent;
    eq_scoreboard scbd;
-   eq_config cfg;
+   eq_config eq_cfg;
    
    `uvm_component_utils (eq_env)
 
@@ -18,8 +18,8 @@ class eq_env extends uvm_env;
       super.build_phase(phase);
       axis_agent = eq_axis_agent::type_id::create("axis_agent", this);
       axil_agent = eq_axil_agent::type_id::create("axil_agent", this);
-      scbd = eq_scoreboard::type_id::create("scbd", this);
-      if(!uvm_config_db#(eq_config)::get(this, "", "eq_config", cfg))
+	   eq_cfg = eq_config::type_id::create("cfg", this);
+      if(!uvm_config_db#(eq_config)::get(this, "", "eq_config", eq_cfg))
         `uvm_fatal("NOCONFIG",{"Config object must be set for: ",get_full_name(),".cfg"})
    endfunction : build_phase
 

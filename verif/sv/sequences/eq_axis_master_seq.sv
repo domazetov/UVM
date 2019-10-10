@@ -52,7 +52,6 @@ class eq_axis_master_seq extends eq_axis_base_seq;
     endtask : body
 
 	extern task nn_start_layer(input integer previous, total);
-	extern task load_weights(input integer n);
 	extern task load_input(input integer n);
 	extern task print_data();
 

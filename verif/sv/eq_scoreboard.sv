@@ -29,15 +29,20 @@ class eq_scoreboard extends uvm_scoreboard;
 
 	// This TLM port is used to connect the scoreboard to the monitor
 	uvm_analysis_imp#(axis_frame, eq_scoreboard) item_collected_imp;
+	uvm_analysis_imp_axis#(axis_frame, eq_scoreboard) port_axis;
+    uvm_analysis_imp_axil#(axil_frame, eq_scoreboard) port_axil;
 
 	`uvm_component_utils_begin(eq_scoreboard)
 		`uvm_field_int(checks_enable, UVM_DEFAULT)
 		`uvm_field_int(coverage_enable, UVM_DEFAULT)
 	`uvm_component_utils_end
     	
+		
 	function new(string name = "eq_scoreboard", uvm_component parent = null);
 		super.new(name,parent);
 		item_collected_imp = new("item_collected_imp", this);
+		port_axis = new("port_axis", this);
+		port_axil = new("port_axil", this);
 	endfunction : new
 
 	function write (input axis_frame fr);

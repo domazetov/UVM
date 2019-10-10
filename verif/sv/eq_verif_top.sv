@@ -1,4 +1,3 @@
-`ifndef EQ_VERIF_TOP_SV
 `define EQ_VERIF_TOP_SV
 
 module eq_verif_top#
@@ -24,6 +23,7 @@ module eq_verif_top#
    axis_if axis_vif(axi_aclk, axi_aresetn);
    
    // DUT
+   `ifndef EQ_VERIF_TOP_SV
    top_module #
       (
          .DATA_WIDTH(DATA_WIDTH),
@@ -55,10 +55,12 @@ module eq_verif_top#
          .axi_aclk                  ( axi_aclk ),
          .axi_aresetn               ( axi_aresetn )
       ); 
+`endif
 
    initial begin
       uvm_config_db#(virtual axil_if)::set(null,"uvm_test_top.*","axil_if", axil_vif);
       uvm_config_db#(virtual axis_if)::set(null,"uvm_test_top.*","axis_if", axis_vif);
+     
       run_test();
    end
 

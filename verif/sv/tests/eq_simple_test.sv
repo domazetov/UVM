@@ -25,8 +25,8 @@ class eq_simple_test extends eq_base_test;
       phase.phase_done.set_drain_time(this, 1000);
       fork
 	      axil_seq.start(env.axil_agent.axil_seqr);	         	            
-	      axis_slave_seq.start(env.axis_agent.axis_slave_seq);     
-         axis_master_seq.start(env.axis_agent.axis_master_seq);    
+	      axis_slave_seq.start(env.axis_agent.axis_slave_seqr);     
+         axis_master_seq.start(env.axis_agent.axis_master_seqr);    
 	   join_any    
       phase.drop_objection(this);
    endtask : run_phase
