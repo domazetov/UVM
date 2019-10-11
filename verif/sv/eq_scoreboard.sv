@@ -1,7 +1,7 @@
 `ifndef EQ_SCOREBOARD_SV
  `define EQ_SCOREBOARD_SV
 `uvm_analysis_imp_decl(_axis)
-`uvm_analysis_imp_decl(_axil)
+//`uvm_analysis_imp_decl(_axil)
 class eq_scoreboard extends uvm_scoreboard;
 
 	//control fields
@@ -28,9 +28,8 @@ class eq_scoreboard extends uvm_scoreboard;
 	int          y_im_expected = $fopen("../sv/IP_output_im.txt", "r");
 
 	// This TLM port is used to connect the scoreboard to the monitor
-	uvm_analysis_imp#(axis_frame, eq_scoreboard) item_collected_imp;
 	uvm_analysis_imp_axis#(axis_frame, eq_scoreboard) port_axis;
-    uvm_analysis_imp_axil#(axil_frame, eq_scoreboard) port_axil;
+ //   uvm_analysis_imp_axil#(axil_frame, eq_scoreboard) port_axil;
 
 	`uvm_component_utils_begin(eq_scoreboard)
 		`uvm_field_int(checks_enable, UVM_DEFAULT)
@@ -40,12 +39,12 @@ class eq_scoreboard extends uvm_scoreboard;
 		
 	function new(string name = "eq_scoreboard", uvm_component parent = null);
 		super.new(name,parent);
-		item_collected_imp = new("item_collected_imp", this);
+
 		port_axis = new("port_axis", this);
-		port_axil = new("port_axil", this);
+	//	port_axil = new("port_axil", this);
 	endfunction : new
 
-	function write (input axis_frame fr);
+	function write_axis (input axis_frame fr);
 		axis_frame fr_clone;
 		assert($cast(fr_clone, fr.clone()));
 
@@ -83,7 +82,7 @@ class eq_scoreboard extends uvm_scoreboard;
 
 			num_of_tr++;
 		end
-	endfunction : write
+	endfunction : write_axis
 
 	function real bin2real(input logic[23:0] x); //IZMENJENA CELA FUNKCIJA
 		logic sign;

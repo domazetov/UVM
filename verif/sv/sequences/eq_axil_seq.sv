@@ -4,7 +4,8 @@
 class eq_axil_seq extends eq_axil_base_seq;
    int num_of_images = 0;
    int image = 0;   
-    `uvm_object_utils (eq_axil_seq)
+  `uvm_object_utils (eq_axil_seq)
+	
 
     function new(string name = "eq_axil_seq");
         super.new(name);

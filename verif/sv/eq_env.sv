@@ -26,7 +26,7 @@ class eq_env extends uvm_env;
    function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       axis_agent.axis_mon.item_collected_port.connect(scbd.port_axis);
-      axil_agent.axil_mon.item_collected_port.connect(scbd.port_axil);      
+   //   axil_agent.axil_mon.item_collected_port.connect(scbd.port_axil);      
    endfunction : connect_phase
 
 endclass : eq_env

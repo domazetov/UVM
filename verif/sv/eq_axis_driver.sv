@@ -24,7 +24,7 @@ class eq_axis_driver extends uvm_driver#(axis_frame);
    extern virtual task reset();
    extern virtual task drive_slave (axis_frame sl);
    extern virtual task drive_master (axis_frame ma);
-   extern virtual task force_reset ();
+ //  extern virtual task force_reset ();
    
 endclass : eq_axis_driver
 
@@ -111,15 +111,15 @@ task eq_axis_driver::drive_master (axis_frame ma);
 	vif.m00_axis_tready = 0;
 endtask : drive_master
 
-task eq_axis_driver::force_reset();
-	@(posedge vif.clk)
-    	vif.rst <= 0;
+//task eq_axis_driver::force_reset();
+//	@(posedge vif.clk)
+ //   	vif.rst <= 0;
 
-	@(posedge vif.clk)
-	@(posedge vif.clk)
-	@(posedge vif.clk)
-		vif.rst <= 1;
-endtask : force_reset
+//	@(posedge vif.clk)
+//	@(posedge vif.clk)
+//	@(posedge vif.clk)
+//		vif.rst <= 1;
+//endtask : force_reset
 
 `endif
 

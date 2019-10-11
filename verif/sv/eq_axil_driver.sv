@@ -28,9 +28,9 @@ class eq_axil_driver extends uvm_driver#(axil_frame);
          // do actual driving here
 	      
 	      @(posedge vif.clk)begin//writing using AXIL
-            vif.s00_axil_awaddr = req.address;
+            vif.s00_axil_awaddr = req.axil_awaddr;
 	         vif.s00_axil_awvalid = 1;
-	         vif.s00_axil_wdata = req.data;
+	         vif.s00_axil_wdata = req.axil_wdata;
 	         vif.s00_axil_wvalid = 1;
 	         vif.s00_axil_bready = 1'b1;	       
 	         wait(vif.s00_axil_awready && vif.s00_axil_wready);	       

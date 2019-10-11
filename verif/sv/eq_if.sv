@@ -16,7 +16,7 @@ interface axil_if (input clk, logic rst);
    logic                                  s00_axil_wvalid;
    logic                                  s00_axil_wready;
    logic                                  s00_axil_bvalid;
-   logic                                  s00_axil_bready;   
+   logic                                  s00_axil_bready;
 
 endinterface : axil_if
 
@@ -29,7 +29,8 @@ interface axis_if (input clk, logic rst);
    //Axi Stream Master
    logic                                 m00_axis_tvalid;
    logic [2*DATA_WIDTH - 1 : 0]          m00_axis_tdata;
-   logic                                 m00_axis_tready;                       
+   logic                                 m00_axis_tready;   
+
    
 endinterface : axis_if
 
