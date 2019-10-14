@@ -6,30 +6,30 @@ entity IP is
     generic ( DATA_WIDTH: positive := 24; -- input signal wordlength and input amplification wordlength 
               AMPLIFICATION_WIDTH: positive := 24; -- wordlength of package_length *** := 11
               BOUNDARIES_WIDTH: positive := 11;
-              C_S_AXI_DATA_WIDTH : positive := 32;
+              --C_S_AXI_DATA_WIDTH : positive := 32;
               PACKAGE_LENGTH: positive := 1024);
  
     Port ( x_re : in STD_LOGIC_VECTOR (DATA_WIDTH-1 downto 0); -- input signal real part
            x_im : in STD_LOGIC_VECTOR (DATA_WIDTH-1 downto 0); -- input signal imaginar part
-           p1 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 1
-           p2 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 2
-           p3 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 3
-           p4 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 4
-           p5 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 5
-           p6 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 6
-           p7 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 7
-           p8 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 8
-           p9 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 9
-           p10 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- amplification for range 10
-           pr1 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- end boundary for range 1
-           pr2 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- end boundary for range 2
-           pr3 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- end boundary for range 3
-           pr4 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- end boundary for range 4
-           pr5 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- end boundary for range 5
-           pr6 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- end boundary for range 6
-           pr7 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- end boundary for range 7
-           pr8 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- end boundary for range 8
-           pr9 : in STD_LOGIC_VECTOR (C_S_AXI_DATA_WIDTH-1 downto 0); -- end boundary for range 9
+           p1 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 1
+           p2 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 2
+           p3 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 3
+           p4 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 4
+           p5 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 5
+           p6 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 6
+           p7 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 7
+           p8 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 8
+           p9 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 9
+           p10 : in STD_LOGIC_VECTOR (AMPLIFICATION_WIDTH-1 downto 0); -- amplification for range 10
+           pr1 : in STD_LOGIC_VECTOR (BOUNDARIES_WIDTH-1 downto 0); -- end boundary for range 1
+           pr2 : in STD_LOGIC_VECTOR (BOUNDARIES_WIDTH-1 downto 0); -- end boundary for range 2
+           pr3 : in STD_LOGIC_VECTOR (BOUNDARIES_WIDTH-1 downto 0); -- end boundary for range 3
+           pr4 : in STD_LOGIC_VECTOR (BOUNDARIES_WIDTH-1 downto 0); -- end boundary for range 4
+           pr5 : in STD_LOGIC_VECTOR (BOUNDARIES_WIDTH-1 downto 0); -- end boundary for range 5
+           pr6 : in STD_LOGIC_VECTOR (BOUNDARIES_WIDTH-1 downto 0); -- end boundary for range 6
+           pr7 : in STD_LOGIC_VECTOR (BOUNDARIES_WIDTH-1 downto 0); -- end boundary for range 7
+           pr8 : in STD_LOGIC_VECTOR (BOUNDARIES_WIDTH-1 downto 0); -- end boundary for range 8
+           pr9 : in STD_LOGIC_VECTOR (BOUNDARIES_WIDTH-1 downto 0); -- end boundary for range 9
            clk : in STD_LOGIC;
            start: in std_logic;
            reset: in std_logic;
@@ -50,7 +50,7 @@ architecture Behavioral of IP is
     signal subtraction_out: unsigned(BOUNDARIES_WIDTH-1 downto 0);
     signal y_re_reg, y_re_next: signed((AMPLIFICATION_WIDTH+DATA_WIDTH)-1 downto 0);
     signal y_im_reg, y_im_next: signed ((AMPLIFICATION_WIDTH+DATA_WIDTH)-1 downto 0);
-    signal mux1: signed(AMPLIFICATION_WIDTH-1 downto 0);
+    signal mux1: unsigned(AMPLIFICATION_WIDTH-1 downto 0);
     signal mux2: unsigned(BOUNDARIES_WIDTH-1 downto 0);
     signal mux3: unsigned(BOUNDARIES_WIDTH-1 downto 0); 
 begin
@@ -194,49 +194,53 @@ begin
      end process;
      
      -- datapath: routing input multiplexer
-     process (state_reg) -- *** , p1, pr1, p2, pr2, p3, pr3, p4, pr4, p5, pr5, p6, pr6, p7, pr7, p8, pr8, p9, pr9, p10) when we are able to change this parametars during evaluation
+     process (state_reg, p1, pr1, p2, pr2, p3, pr3, p4, pr4, p5, pr5, p6, pr6, p7, pr7, p8, pr8, p9, pr9, p10)
      begin
        case state_reg is
            when idle =>
                mux1 <= (others => '0');
+               mux2 <= (others => '0');
+               mux3 <= (others => '0');
            when st_0000 =>
-               mux1 <= signed(p1(AMPLIFICATION_WIDTH-1 downto 0));
-               mux2 <= unsigned(pr1(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned(p1);
+               mux2 <= unsigned(pr1);
+               mux3 <= (others => '0');
            when st_0001 =>
-               mux1 <= signed (p2(AMPLIFICATION_WIDTH-1 downto 0));
-               mux2 <= unsigned (pr2(BOUNDARIES_WIDTH-1 downto 0));
-               mux3 <= unsigned (pr1(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned (p2);
+               mux2 <= unsigned (pr2);
+               mux3 <= unsigned (pr1);
            when st_0010 =>
-               mux1 <= signed (p3(AMPLIFICATION_WIDTH-1 downto 0));
-               mux2 <= unsigned (pr3(BOUNDARIES_WIDTH-1 downto 0));
-               mux3 <= unsigned (pr2(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned (p3);
+               mux2 <= unsigned (pr3);
+               mux3 <= unsigned (pr2);
            when st_0011 =>
-               mux1 <= signed (p4(AMPLIFICATION_WIDTH-1 downto 0));
-               mux2 <= unsigned (pr4(BOUNDARIES_WIDTH-1 downto 0));
-               mux3 <= unsigned (pr3(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned (p4);
+               mux2 <= unsigned (pr4);
+               mux3 <= unsigned (pr3);
            when st_0100 =>
-               mux1 <= signed (p5(AMPLIFICATION_WIDTH-1 downto 0));
-               mux2 <= unsigned (pr5(BOUNDARIES_WIDTH-1 downto 0));
-               mux3 <= unsigned (pr4(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned (p5);
+               mux2 <= unsigned (pr5);
+               mux3 <= unsigned (pr4);
            when st_0101 =>
-               mux1 <= signed (p6(AMPLIFICATION_WIDTH-1 downto 0));
-               mux2 <= unsigned (pr6(BOUNDARIES_WIDTH-1 downto 0));
-               mux3 <= unsigned (pr5(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned (p6);
+               mux2 <= unsigned (pr6);
+               mux3 <= unsigned (pr5);
            when st_0110 =>
-               mux1 <= signed (p7(AMPLIFICATION_WIDTH-1 downto 0));
-               mux2 <= unsigned (pr7(BOUNDARIES_WIDTH-1 downto 0));
-               mux3 <= unsigned (pr6(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned (p7);
+               mux2 <= unsigned (pr7);
+               mux3 <= unsigned (pr6);
            when st_0111 =>
-               mux1 <= signed (p8(AMPLIFICATION_WIDTH-1 downto 0));
-               mux2 <= unsigned (pr8(BOUNDARIES_WIDTH-1 downto 0));
-               mux3 <= unsigned (pr7(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned (p8);
+               mux2 <= unsigned (pr8);
+               mux3 <= unsigned (pr7);
            when st_1000 =>
-               mux1 <= signed (p9(AMPLIFICATION_WIDTH-1 downto 0));
-               mux2 <= unsigned (pr9(BOUNDARIES_WIDTH-1 downto 0));
-               mux3 <= unsigned (pr8(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned (p9);
+               mux2 <= unsigned (pr9);
+               mux3 <= unsigned (pr8);
            when st_1001 =>
-               mux1 <= signed (p10(AMPLIFICATION_WIDTH-1 downto 0));
-               mux3 <= unsigned (pr9(BOUNDARIES_WIDTH-1 downto 0));
+               mux1 <= unsigned (p10);
+               mux2 <= (others => '0');
+               mux3 <= unsigned (pr9);
       end case;
     end process; 
 
@@ -254,8 +258,8 @@ begin
     -- datapath: functional units
    adder_out <= adder_reg + 1;
    subtraction_out <= (PACKAGE_LENGTH+1) - adder_out;
-   y_re_next <= mux1 * signed(x_re);
-   y_im_next <= mux1 * signed(x_im);
+   y_re_next <= signed(mux1) * signed(x_re);
+   y_im_next <= signed(mux1) * signed(x_im);
    
     -- datapath: status
    status_next <= '1' when adder_out = mux2 else '0';
