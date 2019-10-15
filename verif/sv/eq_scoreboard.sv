@@ -1,7 +1,7 @@
 `ifndef EQ_SCOREBOARD_SV
  `define EQ_SCOREBOARD_SV
 `uvm_analysis_imp_decl(_axis)
-//`uvm_analysis_imp_decl(_axil)
+`uvm_analysis_imp_decl(_axil)
 class eq_scoreboard extends uvm_scoreboard;
 
 	//control fields
@@ -29,7 +29,7 @@ class eq_scoreboard extends uvm_scoreboard;
 
 	// This TLM port is used to connect the scoreboard to the monitor
 	uvm_analysis_imp_axis#(axis_frame, eq_scoreboard) port_axis;
- //   uvm_analysis_imp_axil#(axil_frame, eq_scoreboard) port_axil;
+    uvm_analysis_imp_axil#(axil_frame, eq_scoreboard) port_axil;
 
 	`uvm_component_utils_begin(eq_scoreboard)
 		`uvm_field_int(checks_enable, UVM_DEFAULT)
@@ -39,10 +39,14 @@ class eq_scoreboard extends uvm_scoreboard;
 		
 	function new(string name = "eq_scoreboard", uvm_component parent = null);
 		super.new(name,parent);
-
 		port_axis = new("port_axis", this);
-	//	port_axil = new("port_axil", this);
+		port_axil = new("port_axil", this);
 	endfunction : new
+
+
+	function write_axil (input axil_frame frl);
+
+	endfunction : write_axil
 
 	function write_axis (input axis_frame fr);
 		axis_frame fr_clone;
